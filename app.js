@@ -47,7 +47,7 @@ weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParam
     
     $scope.city = cityService.city;
     
-    $scope.hours = $routeParams.hours || 3;
+    $scope.hours = $routeParams.hours || '1';
     
     $scope.weatherAPI = $resource("http://api.openweathermap.org/data/2.5/forecast?APPID=1f658061877d3e12cce74211c08c7928",{
         callback: "JSON_CALLBACK"},{get: {method:"JSONP"}});
@@ -63,4 +63,21 @@ weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParam
         return new Date(dt * 1000);
     }
 }]);
+
+//directives
+
+weatherApp.directive("weatherPanel", function(){
+    return {
+        restrict: 'E',
+        templateURL: 'directives/weatherpanel.html',
+        replace: true,
+        scope: {
+            weatherHour: "=",
+            convertToStandard: "&",
+            convertToDate: "&",
+            dateFormat: "@"
+        }
+    }
+    
+});
 
