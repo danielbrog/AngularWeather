@@ -1,17 +1,18 @@
+<p>
+    <a href="#/"> Back to Search</a>
+</p>
+
 Forecast for {{ city }}
+<hr />
+3 hour intervals: <a href="#forecast/1" ng-class="{ 'bg-primary': hours === '1'}">1</a> | <a href="#forecast/3" ng-class="{ 'bg-primary': hours === '3'}">3</a> | <a href="#forecast/6" ng-class="{ 'bg-primary': hours === '6'}">6</a>
+
+<hr />
 
 <div ng-repeat="w in weatherResult.list">
 
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"> {{ convertToDate(w.dt) | date : 'h:mm a - MMM d, y' }}</h3>
-                </div>
-                <div class="panel-body">
-                    Daytime temperature: {{ convertToCelsius(w.main.temp) }}
-                </div>
-            </div>
+            <weather-panel weather-hour="w" convert-to-standard="convertToCelsius(daytimeTemp)" convert-to-date="convertToDate(dt)" date-format="'h:mm a - MMM d, y"></weather-panel>
         </div>
     </div>
     
